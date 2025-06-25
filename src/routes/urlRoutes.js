@@ -6,8 +6,11 @@ const {
   getUrlStats,
 } = require('../controllers/urlController');
 
-router.post('/shorten', shortenUrl);
-router.get('/stats/:code', getUrlStats);
-router.get('/:code', redirectUrl);
+const rateLimiter = require('../middleware/rateLimiter');
+
+router.post('/shorten', rateLimiter, shortenUrl);
+router.get('/stats/:code', rateLimiter, getUrlStats);
+router.get('/:code', rateLimiter, redirectUrl);
+
 
 module.exports = router;
