@@ -1,3 +1,4 @@
+const { sanitizeInput } = require("../utils/sanitizeInput");
 const URL = require("../models/urlModel");
 const { generateShortCode } = require("../utils/shortCodeGenerator");
 const { isValidUrl } = require("../utils/urlValidator");
@@ -6,7 +7,10 @@ const { recordAnalytics } = require("./analyticsController");
 
 async function shortenUrl(req, res) {
   try {
-    const { original_url, custom_alias, expires_at } = req.body;
+    let { original_url, custom_alias, expires_at } = req.body;
+
+    original_url = sanitizeInput(original_url);
+    custom_alias = custom_alias ? sanitizeInput(custom_alias) : undefined;
 
     // URL formatı kontrolü
     if (!isValidUrl(original_url)) {
