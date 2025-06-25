@@ -1,15 +1,15 @@
 const Analytics = require('../models/analyticsModel');
-const URL = require('../models/urlModel');
 
 async function recordAnalytics(urlId, req) {
   try {
     const data = {
       url_id: urlId,
-      ip_address: req.ip,
+      clicked_at: new Date(),
+      ip_address: req.ip.replace('::ffff:', ''),
       user_agent: req.headers['user-agent'],
-      referer: req.headers.referer || '',
+      referer: req.headers['referer'] || '',
       country: req.headers['cf-ipcountry'] || 'Unknown',
-      city: 'Unknown',
+      city: 'Unknown'
     };
 
     await Analytics.create(data);

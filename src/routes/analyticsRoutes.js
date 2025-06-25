@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Analytics = require('../models/analyticsModel');
+const URL = require('../models/urlModel');
 
 router.get('/:code', async (req, res) => {
   try {
-    const urlDoc = await require('../models/urlModel').findOne({
+    const urlDoc = await URL.findOne({
       $or: [{ short_code: req.params.code }, { custom_alias: req.params.code }],
     });
 
