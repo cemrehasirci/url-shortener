@@ -13,7 +13,7 @@ const urlSchema = new mongoose.Schema({
   custom_alias: {
     type: String,
     unique: true,
-    sparse: true, // sadece varsa kontrol et
+    sparse: true,
   },
   user_id: {
     type: String,

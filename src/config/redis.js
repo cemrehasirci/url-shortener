@@ -10,14 +10,16 @@ async function connectRedis() {
   redisClient.on('error', (err) => {
     console.error('❌ Redis error:', err);
 
-    // TEST ortamındaysa uygulamayı kapatma
     if (process.env.NODE_ENV !== 'test') {
       process.exit(1);
     }
   });
 
   await redisClient.connect();
-  console.log('✅ Redis connected');
+
+  if (process.env.NODE_ENV !== 'test') {
+    console.log('✅ Redis connected');
+  }
 }
 
 function getRedisClient() {

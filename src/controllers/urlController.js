@@ -37,7 +37,6 @@ async function shortenUrl(req, res) {
       expires_at,
     });
 
-    // Redis cache'e ekle
     await setToCache(short_code, newUrl);
 
     res.status(201).json({
@@ -65,7 +64,6 @@ async function redirectUrl(req, res) {
 
       if (!urlDoc) return res.status(404).json({ error: "URL bulunamadı." });
 
-      // cache'e yaz
       await setToCache(code, urlDoc);
     }
 

@@ -1,4 +1,3 @@
-jest.setTimeout(20000); // 20 saniye timeout
 const express = require('express');
 const router = express.Router();
 const {

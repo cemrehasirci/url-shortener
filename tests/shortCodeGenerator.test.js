@@ -1,3 +1,5 @@
+// kısa kodun uzunluk ve karakter testleri 
+
 const { generateShortCode } = require('../src/utils/shortCodeGenerator');
 
 describe('Short Code Generator', () => {

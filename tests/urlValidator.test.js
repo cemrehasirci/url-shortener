@@ -1,3 +1,5 @@
+// geçerli/geçersiz URL kontrolleri
+
 const { isValidUrl } = require('../src/utils/urlValidator');
 
 describe('URL Validator', () => {

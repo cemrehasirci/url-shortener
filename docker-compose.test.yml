@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  redis-test:
+    image: redis:alpine
+    container_name: redis-test
+    ports:
+      - "6381:6379"
+
+  mongo-test:
+    image: mongo
+    container_name: mongo-test
+    ports:
+      - "27018:27017"
+
+  app-test:
+    build:
+      context: .
+    container_name: app-test
+    environment:
+      - NODE_ENV=test
+      - MONGO_URL=mongodb://mongo-test:27017/urlShortenerTestDB
+      - REDIS_URL=redis://redis-test:6379
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo-test
+      - redis-test
+    command: npm test
