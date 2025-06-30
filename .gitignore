@@ -40,3 +40,8 @@ build/
 PORT=3000
 REDIS_HOST=localhost
 REDIS_PORT=6379
+
+node_modules/
+.idea
+.env
+.env.test
